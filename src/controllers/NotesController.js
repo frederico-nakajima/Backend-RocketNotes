@@ -82,6 +82,7 @@ class NotesController{
                 .whereLike("title", `%${title}%`)
                 .whereIn("name", filterTags)
                 .innerJoin("notes", "notes.id", "tags.note_id")
+                .groupBy("notes.id")
                 .orderBy("notes.title")
 
         } else {
@@ -101,7 +102,7 @@ class NotesController{
             }
         })
 
-        return response.json({notesWhithTags})
+        return response.json(notesWhithTags)
 
     }
 }
